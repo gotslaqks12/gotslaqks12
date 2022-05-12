@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+    background-color: lightgrey;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+textarea,
+select,
+input,
+button {
+    color: red;
+    font-size: 25px;
+}
+
+input{
+    color: black;
+}
+
+h1 {display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+main {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 2rem;
+    
+}
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+.pokemonBox {
+    display: flex;
+    justify-content: center;
+    margin-top: 15rem;
+}
+
+
+.pokemonBox p {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: black;
+  }
+h3 {
+    color: black;
+}
+button {
+    background-color: black;
+    color: white
+}
