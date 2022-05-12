@@ -24,11 +24,13 @@ function getPokemon(pm) {
     <div class="pokemonInfo">
         <h3>${capitalizeFirstLetter(data.name)}</h3>
         <br>
-        <p>Weight ${data.weight}</p>
+        <p>Weight: ${data.weight}</p>
         <br>
-        <p>Height ${data.height}</p>
+        <p>Height: ${data.height}</p>
         <br>
-        <p>ID # ${data.id}</p>
+        <p>Types: ${data.types.map((type) => type.type.name).join(', ')}</p>
+        <br>
+        <p>ID #: ${data.id}</p>
 
     </div>`
     
@@ -40,3 +42,4 @@ function getPokemon(pm) {
     });
   pm.preventDefault();
 }
+
