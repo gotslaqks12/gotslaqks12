@@ -1,45 +1,46 @@
-document.querySelector('#search').addEventListener('click', getPokemon);
+// How to request data from an API using javaScript and jQuery
+
+// There are many ways to do this!
+// 1. jQuerys $.ajax() function
+// 2. The Browser's fetch() function 
+// 3. Using the Axios hhtp client library
+
+// VARIABLES
+const URL = "https://pokeapi.co/api/v2/pokemon/";
+
+// ELEMENT REFERENCES jQuery variables
+const $name = $('#name');
+const $weight = $('#weight');
+const $height = $('#height');
+const $id = $('#id');
+const $form = $('form');
+const $input = $('input[type="text"]');
+
+// EVENT LISTENERS
+$form.on('submit', handleGetData)
 
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+// function handleGetData(event){
 
-function lowerCaseName(string) {
-  return string.toLowerCase();
-}
+function handleGetData(event) {
 
-function getPokemon(pm) {
-  const name = document.querySelector('#pokemonName').value;
-  const pokemonName = lowerCaseName(name);
 
-  fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-    .then((response) => response.json())
-    .then((data) => {
-      document.querySelector('.pokemonBox').innerHTML = `
-    <div>
-        <img src="${data.sprites.other["official-artwork"].front_default}"
-        alt="${capitalizeFirstLetter(data.name)}"/>
-    </div>
-    <div class="pokemonInfo">
-        <h3>${capitalizeFirstLetter(data.name)}</h3>
-        <br>
-        <p>Weight: ${data.weight}</p>
-        <br>
-        <p>Height: ${data.height}</p>
-        <br>
-        <p>Types: ${data.types.map((type) => type.type.name).join(', ')}</p>
-        <br>
-        <p>ID #: ${data.id}</p>
+  const userInput = $input.val();
 
-    </div>`
-    
-    })
-    .catch((err) => {
-      document.querySelector('.pokemonBox').innerHTML = `
+  $.ajax(URL + userInput).then(function (data) {
+    console.log('data is ready')
+    // console.log(data)
+    $name.text(data.name)
+    $weight.text(data.weight)
+    $height.text(data.height)
+    $id.text(data.id)
+    $('main').append(`<img src="${data.sprites.other["official-artwork"].front_default}"/>`)
+  }, function (error) {
+    console.log('Pokemon Not Found')
+    console.log(error)
+    document.querySelector('.pokemonBox').innerHTML = `
       <h2>Pokemon Not Found!</h2>`
-      console.log('Pokemon not found', err);
-    });
-  pm.preventDefault();
-}
+  })
 
+  event.preventDefault();
+}
